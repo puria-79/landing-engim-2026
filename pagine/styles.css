@@ -1,0 +1,389 @@
+* {
+    margin: 0;
+    border: 0;
+    font-family: system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
+    -webkit-touch-callout: none;
+    -webkit-user-select: none;
+    -khtml-user-select: none;
+    -moz-user-select: none;
+    -ms-user-select: none;
+    user-select: none;
+    --primary: #6279B8;
+    --background: #8EA4D2;
+    --secondary: #49516F;
+    --title: #496F5D;
+    --highlight: #4C9F70;
+}
+
+body {
+    cursor: default;
+    overflow-x: hidden;
+    display: grid;
+    grid-template-areas:
+        "parallax parallax"
+        "header header"
+        "section section"
+        "footer footer";
+    grid-template-columns: 10vw 1fr;
+    grid-template-rows: 0px 5rem 1fr 10rem;
+    width: 100vw;
+    min-height: 100vh;
+}
+
+ul {
+    padding-inline-start: 0;
+}
+
+.parallax {
+    grid-area: parallax;
+    position: relative;
+    width: 100%;
+    height: 100vh;
+    list-style-type: none;
+
+    & .layer {
+        position: absolute;
+        width: inherit;
+        height: inherit;
+        background-position: center 25%;
+        background-size: cover;
+        transition: transform 0.1 ease-out;
+
+        &:nth-of-type(1) {
+            background-image: url('https://raw.githubusercontent.com/misalagp/imgs/53ece8c56d462838e143383adc1a3078c1960e4d/1.svg');
+        }
+
+        &:nth-of-type(2) {
+            background-image: url('https://raw.githubusercontent.com/misalagp/imgs/53ece8c56d462838e143383adc1a3078c1960e4d/2.svg');
+        }
+
+        &:nth-of-type(3) {
+            background-image: url('https://raw.githubusercontent.com/misalagp/imgs/53ece8c56d462838e143383adc1a3078c1960e4d/3.svg');
+        }
+
+        &:nth-of-type(4) {
+            background-image: url('https://raw.githubusercontent.com/misalagp/imgs/53ece8c56d462838e143383adc1a3078c1960e4d/4.svg');
+        }
+
+        &:nth-of-type(5) {
+            background-image: url('https://raw.githubusercontent.com/misalagp/imgs/53ece8c56d462838e143383adc1a3078c1960e4d/4.svg');
+        }
+
+        &:nth-of-type(6) {
+            background-image: url('https://gist.githubusercontent.com/mondenoir/5395b6e7d9445c3a0fc82e6ece97268c/raw/bca5c0c6397e38d79b5af9e88f78f0aa7b515b94/img-1.svg');
+        }
+    }
+}
+
+
+header {
+    z-index: 1;
+    display: grid;
+    grid-area: header;
+    grid-template-areas: "title nav login";
+    grid-template-columns: 1fr 2fr 1fr;
+    align-items: center;
+}
+
+#logo>h1 {
+    width: fit-content;
+    text-align: center;
+    grid-area: title;
+    color: var(--title);
+    cursor: pointer;
+
+}
+
+#logo {
+    width: 100%;
+    height: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+nav {
+    grid-area: nav;
+    height: 100%;
+}
+
+#link {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100%;
+    width: 100%;
+    gap: 50px;
+}
+
+a {
+    padding-top: 12px;
+    padding-bottom: 12px;
+    padding-left: 8px;
+    padding-right: 8px;
+    border-radius: 50px;
+    text-decoration: none;
+    color: black;
+    font-weight: 500;
+    transition: all;
+    transition-timing-function: ease;
+    transition-duration: 0.3s;
+}
+
+@property --link-width {
+    syntax: "<percentage>";
+    inherits: true;
+    initial-value: 0%;
+}
+
+a::after {
+    display: flex;
+    flex-wrap: nowrap;
+    width: var(--link-width);
+    height: 1px;
+    content: "";
+    background-color: black;
+    transition: width;
+    transition-duration: 0.5s;
+}
+
+a:hover {
+    --link-width: 100%;
+}
+
+aside {
+    grid-area: aside;
+}
+
+section {
+    z-index: 1;
+    grid-area: section;
+    display: flex;
+    flex-direction: column;
+    gap: 10vw;
+    padding: 4rem;
+}
+
+section>img {
+    border-radius: 1rem;
+    margin-left: 20vw;
+}
+
+section>div {
+    height: 30vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 5vw;
+    opacity: 1;
+}
+
+#hero {
+    position: relative;
+    margin-top: 5rem;
+    display: flex;
+    justify-content: center;
+    flex-direction: column;
+    flex-grow: 0;
+    flex-basis: 0;
+    flex-shrink: 1;
+    flex-wrap: nowrap;
+}
+
+#hero>p {
+    font-size: 3rem;
+    font-weight: 300;
+    line-height: 6rem;
+}
+
+#hero p:nth-child(1) {
+    color: white;
+}
+
+#hero>p:nth-child(2) {
+    font-size: 6rem;
+    font-family: 'Trebuchet MS', 'Lucida Sans Unicode', 'Lucida Grande', 'Lucida Sans', Arial, sans-serif;
+    font-weight: 400;
+    font-style: italic;
+    /* background-clip: text; */
+    background-size: cover;
+    background-position: 0;
+    background-image: url("https://raw.githubusercontent.com/misalagp/imgs/53ece8c56d462838e143383adc1a3078c1960e4d/2.svg");
+    background-repeat: no-repeat;
+    isolation: isolate;
+    color: transparent;
+    line-height: 4rem;
+}
+
+#hero>p:nth-child(3) {
+    font-style: italic;
+    color: var(--secondary);
+    line-height: 4rem;
+}
+
+span {
+    padding-top: 2vh;
+    font-size: medium;
+}
+
+section>div>div:nth-child(2) {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+#contatti {
+    width: 20rem;
+    padding: 20px;
+    padding-left: 60px;
+    padding-right: 60px;
+    border-radius: 60px;
+    margin-top: 2rem;
+    background-color: var(--highlight);
+    color: white;
+    font-weight: 500;
+    font-size: 20px;
+    border: 2px var(--highlight) solid;
+    transition: all;
+    transition-duration: 0.5s;
+}
+
+#contatti:hover {
+    transform: scale(1.1);
+    border: 2px var(--highlight) solid;
+    cursor: pointer;
+}
+
+#login-signup {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 1vw;
+}
+
+#login-signup>img {
+    transition: all;
+    transition: 0.3s;
+    border-radius: 0.5rem;
+    padding: 0.7rem;
+}
+
+#login-signup>img:hover {
+    cursor: pointer;
+    transform: scale(1.2);
+}
+
+.carosel {
+    z-index: 2;
+    margin-top: 10vh;
+    position: relative;
+}
+
+.container {
+    display: flex;
+    gap: 5vmin;
+    position: absolute;
+    left: 50%;
+}
+
+.container img {
+    border-radius: 50px;
+}
+
+footer {
+    grid-area: footer;
+    display: grid;
+    grid-template-areas: "links social";
+    grid-template-columns: 3fr 1fr;
+    animation: scale-up linear both;
+    animation-timeline: view(block);
+    animation-range: cover 0% cover 100%;
+}
+
+#social {
+    grid-area: social;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding: 2rem;
+    gap: 1rem;
+}
+
+#social>img {
+    filter: invert(1);
+    border: 2px black solid;
+    border-radius: 1rem;
+    padding: 0.5rem;
+    transition: all;
+    transition-duration: 0.3s;
+}
+
+#social>img:hover {
+    transform: scale(1.2);
+    cursor: pointer;
+}
+
+#footer-logo {
+    display: flex;
+    justify-content: left;
+    align-items: center;
+    padding-left: 5rem;
+}
+
+#footer-logo>h2 {
+    color: white;
+    font-size: 40px;
+}
+
+
+@media all and (max-width: 1150px) {
+    header {
+        display: grid;
+        grid-area: header;
+        grid-template-areas: "title login";
+        grid-template-columns: 50vw 1fr;
+        align-items: center;
+    }
+
+    #check {
+        display: none;
+    }
+
+    nav {
+        display: none;
+    }
+}
+
+
+@media all and (max-width: 752px) {
+    #hero>p {
+        font-size: 2rem;
+    }
+
+    #hero>p:nth-child(2) {
+        font-size: 5rem;
+    }
+}
+
+@media (max-width: 550px) {
+    body {
+        grid-template-rows: 0px 7rem 1fr 10rem;
+    }
+
+    #hero>p {
+        font-size: 3rem;
+    }
+
+    #hero>p:nth-child(2) {
+        font-size: 4rem;
+    }
+
+    #footer-logo {
+        display: none;
+    }
+
+    footer {
+        display: flex;
+        justify-content: center;
+    }
+}
