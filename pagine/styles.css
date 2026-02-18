@@ -22,12 +22,15 @@ body {
     grid-template-areas:
         "parallax parallax"
         "header header"
-        "section section"
+        "section1 section1"
+        "section2 section2"
         "footer footer";
     grid-template-columns: 10vw 1fr;
-    grid-template-rows: 0px 5rem 1fr 10rem;
+    grid-template-rows: 0px 5rem 110vh 1fr 10rem;
     width: 100vw;
     min-height: 100vh;
+    perspective: 1px;
+    background-color: #272818;
 }
 
 ul {
@@ -38,14 +41,15 @@ ul {
     grid-area: parallax;
     position: relative;
     width: 100%;
-    height: 100vh;
+    height: 120vh;
     list-style-type: none;
-
+    
     & .layer {
         position: absolute;
         width: inherit;
         height: inherit;
         background-position: center 25%;
+        z-index: -1;
         background-size: cover;
         transition: transform 0.1 ease-out;
 
@@ -155,21 +159,25 @@ aside {
     grid-area: aside;
 }
 
-section {
+.landing {
     z-index: 1;
-    grid-area: section;
+    grid-area: section1;
     display: flex;
     flex-direction: column;
-    gap: 10vw;
-    padding: 4rem;
+    gap: 10vh;
 }
 
-section>img {
+.first-look {
+    padding-top: 4rem;
+}
+
+
+.landing>img {
     border-radius: 1rem;
     margin-left: 20vw;
 }
 
-section>div {
+.landing>div {
     height: 30vh;
     display: flex;
     justify-content: center;
@@ -205,13 +213,7 @@ section>div {
     font-family: 'Trebuchet MS', 'Lucida Sans Unicode', 'Lucida Grande', 'Lucida Sans', Arial, sans-serif;
     font-weight: 400;
     font-style: italic;
-    /* background-clip: text; */
-    background-size: cover;
-    background-position: 0;
-    background-image: url("https://raw.githubusercontent.com/misalagp/imgs/53ece8c56d462838e143383adc1a3078c1960e4d/2.svg");
-    background-repeat: no-repeat;
     isolation: isolate;
-    color: transparent;
     line-height: 4rem;
 }
 
@@ -226,7 +228,7 @@ span {
     font-size: medium;
 }
 
-section>div>div:nth-child(2) {
+.landing>div>div:nth-child(2) {
     display: flex;
     justify-content: center;
     align-items: center;
@@ -273,7 +275,15 @@ section>div>div:nth-child(2) {
     transform: scale(1.2);
 }
 
+.more {
+    grid-area: section2;
+    min-height: 50vh;
+    background-color: inherit;
+}
+
 .carosel {
+    height: 100%;
+    width: 100%;
     z-index: 2;
     margin-top: 10vh;
     position: relative;
@@ -298,6 +308,7 @@ footer {
     animation: scale-up linear both;
     animation-timeline: view(block);
     animation-range: cover 0% cover 100%;
+    background-color: inherit;
 }
 
 #social {
@@ -337,6 +348,10 @@ footer {
 
 
 @media all and (max-width: 1150px) {
+    body {
+        grid-template-rows: 0px 7rem 80vh 1fr 10rem;
+    }
+
     header {
         display: grid;
         grid-area: header;
@@ -356,6 +371,7 @@ footer {
 
 
 @media all and (max-width: 752px) {
+    
     #hero>p {
         font-size: 2rem;
     }
@@ -366,10 +382,6 @@ footer {
 }
 
 @media (max-width: 550px) {
-    body {
-        grid-template-rows: 0px 7rem 1fr 10rem;
-    }
-
     #hero>p {
         font-size: 3rem;
     }
