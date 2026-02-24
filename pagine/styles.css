@@ -20,13 +20,14 @@ body {
     overflow-x: hidden;
     display: grid;
     grid-template-areas:
-        "parallax parallax"
-        "header header"
-        "section1 section1"
-        "section2 section2"
-        "footer footer";
-    grid-template-columns: 10vw 1fr;
-    grid-template-rows: 0px 5rem 110vh 1fr 10rem;
+        "parallax"
+        "header"
+        "section1"
+        "section2"
+        "footer"
+        "privacy";
+    grid-template-columns: 1fr;
+    grid-template-rows: 0px 5rem 110vh 1fr 10rem 10rem;
     width: 100vw;
     min-height: 100vh;
     perspective: 1px;
@@ -43,7 +44,7 @@ ul {
     width: 100%;
     height: 120vh;
     list-style-type: none;
-    
+
     & .layer {
         position: absolute;
         width: inherit;
@@ -275,39 +276,145 @@ span {
     transform: scale(1.2);
 }
 
+.RWB {
+    font-size: 4rem;
+    color: #fff;
+    text-shadow: 5px 5px 0 #232416, 10px 10px 0 #14140c;
+    animation: shadow-dance 5s infinite;
+}
+
+@keyframes shadow-dance {
+
+    0%,
+    100% {
+        text-shadow: 5px 5px 0 #232416, 10px 10px 0 #14140c;
+    }
+
+    50% {
+        text-shadow: -5px -5px 0 #14140c, -10px -10px 0 #232416;
+    }
+}
+
 .more {
     grid-area: section2;
     min-height: 50vh;
     background-color: inherit;
+    width: 100vw;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+
+.more h1 {
+    font-size: 24rem;
+    color: #3d3e2f;
 }
 
 .carosel {
-    height: 100%;
-    width: 100%;
+    height: min-content;
+    width: auto;
     z-index: 2;
     margin-top: 10vh;
-    position: relative;
+    padding: 0 10rem;
 }
 
 .container {
     display: flex;
-    gap: 5vmin;
-    position: absolute;
-    left: 50%;
+    flex-wrap: wrap;
+    gap: 1rem;
+    align-items: center;
+    justify-content: center;
 }
 
 .container img {
-    border-radius: 50px;
+    border-radius: 10px;
+}
+
+.contatti {
+    width: 100%;
+    height: 100%;
+    margin-top: 5rem;
+    display: flex;
+    justify-content: center;
+}
+
+.contatti h1 {
+    font-size: 5rem;
+    color: white;
+}
+
+.contatti input {
+    position: relative;
+    padding: 0.5rem;
+    min-width: 4rem;
+    border-radius: 5px;
+}
+
+.contatti span {
+    position: relative;
+}
+
+.contatti span::after {
+    position: absolute;
+    content: "*";
+    bottom: 0;
+    right: -0.5rem;
+    color: red;
+}
+
+.contatti input:focus {
+    outline: none;
+}
+
+.contatti input[type='radio'] {
+    padding: 0px;
+    min-width: 0;
+}
+
+.contatti input[type='checkbox'] {
+    padding: 0px;
+    min-width: 0;
+    margin-left: 1rem;
+}
+
+.contatti form {
+    padding: 3rem;
+    color: white;
+    background-color: #3d3e2f;
+    gap: 2rem;
+    min-width: 300px;
+    min-height: 500px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+    border-radius: 10px;
+}
+
+.DDN {
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+}
+
+.Newsletter {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 1rem;
+}
+
+.tos {
+    display: flex;
 }
 
 footer {
+    margin-top: 10rem;
     grid-area: footer;
     display: grid;
     grid-template-areas: "links social";
     grid-template-columns: 3fr 1fr;
-    animation: scale-up linear both;
-    animation-timeline: view(block);
-    animation-range: cover 0% cover 100%;
     background-color: inherit;
 }
 
@@ -346,6 +453,31 @@ footer {
     font-size: 40px;
 }
 
+.privacy {
+    color: white;
+    font-weight: 900;
+    display: flex;
+    padding: 2rem;
+    justify-content: flex-start;
+    align-items: center;
+    z-index: 3;
+    position: sticky;
+    bottom: 0;
+    grid-area: privacy;
+    width: 100%;
+    height: 5rem;
+    background-color: #3d3e2f;
+    gap: 5rem;
+}
+
+.privacy button {
+    background-color: #14140c;
+    color: white;
+    padding: 1rem 2rem;
+    border-radius: 5px;
+    font-weight: 500;
+}
+
 
 @media all and (max-width: 1150px) {
     body {
@@ -371,7 +503,10 @@ footer {
 
 
 @media all and (max-width: 752px) {
-    
+    .more h1 {
+        font-size: 5rem;
+    }
+
     #hero>p {
         font-size: 2rem;
     }
@@ -382,6 +517,13 @@ footer {
 }
 
 @media (max-width: 550px) {
+    .contatti h1 {
+        font-size: 2rem;
+    }
+    .more h1 {
+        font-size: 5rem;
+    }
+
     #hero>p {
         font-size: 3rem;
     }

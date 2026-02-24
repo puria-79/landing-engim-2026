@@ -31,9 +31,9 @@ REQUISITI DI PROGETTO
         </div>
         <nav>
             <div id="link">
-                <a href="chisiamo.html">chi siamo</a>
-                <a href="prodotti.html">prodotti</a>
-                <a href="contatti.html">contatti</a>
+                <a href="#prodotti">chi siamo</a>
+                <a href="#prodotti">prodotti</a>
+                <a href="#Contatti">contatti</a>
             </div>
         </nav>
         <div id="login-signup">
@@ -61,6 +61,7 @@ REQUISITI DI PROGETTO
         </div>
     </section>
     <section class="more">
+        <h1 id="prodotti" class="RWB">RWB</h1>
         <div class="carosel">
             <div class="container" data-mouse-down-at="0" data-mouse-now="0">
                 <img src="../assets/immagini/flexible-images.jpg" alt="nature1" width="500" height="300"
@@ -75,6 +76,50 @@ REQUISITI DI PROGETTO
                     height="300" draggable="false">
             </div>
         </div>
+        <div id="Contatti" class="contatti">
+            <form>
+                <h1>Newsletter</h1>
+                <div>
+                    <input type="text" name="Nome" id="Nome" placeholder="Nome (Obligatorio)" required>
+                    <span></span>
+                </div>
+                <div>
+                    <input type="text" name="Cognome" id="Cognome" placeholder="Cognome (Obligatorio)" required>
+                    <span></span>
+                </div>
+                <div class="DDN">
+                    <label for="DDN">Data di nascita</label>
+                    <div>
+                        <input type="date" name="DDN" id="DDN" required>
+                        <span></span>
+                    </div>
+                </div>
+                <div>
+                    <input type="email" name="Email" id="Email" placeholder="Email (Obligatorio)" required>
+                    <span></span>
+                </div>
+                <div class="Newsletter">
+                    <p>Newsletter:</p>
+                    <div>
+                        <label for="Accetto">Accetto</label>
+                        <input type="radio" name="Newsletter" id="Accetto" value="Accetto" required>
+                        <span></span>
+                    </div>
+                    <div>
+                        <label for="NonAccetto">Non Accetto</label>
+                        <input type="radio" name="Newsletter" id="NonAccetto" value="Non Accetto" required>
+                        <span></span>
+                    </div>
+                    
+                </div>
+                <div class="tos">
+                    <p>Privacy:</p>
+                    <input type="checkbox" name="tos" id="tos" required>
+                    <span></span>
+                </div>
+                <input type="submit" value="Invia">
+            </form>
+        </div>
     </section>
     <footer>
         <div id="social">
@@ -87,6 +132,13 @@ REQUISITI DI PROGETTO
             <h2>Darabi</h2>
         </div>
     </footer>
+    <div class="privacy">
+        <p>Privacy</p>
+        <div>
+            <button type="button" id="PrivacyAcc">Accetto</button>
+            <button type="button" id="PrivacyRif">Rifiuto</button>
+        </div>
+    </div>
     <script src="../main.js"></script>
 </body>
 
