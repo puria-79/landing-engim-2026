@@ -41,14 +41,21 @@
 
 // window.addEventListener('scroll', parallax, false);
 
+const parallaxContainer = document.querySelector(".parallax-container")
 
-const privacyAcc = document.querySelector("#PrivacyAcc")
-const privacyRif = document.querySelector("#PrivacyRif")
-const privacy = document.querySelector(".privacy")
-privacyAcc.addEventListener("click", e => {
-  privacy.style.display = "none"
-})
-privacyRif.addEventListener("click", e => {
-  privacy.style.display = "none"
-})
+if (parallaxContainer) {
+  const setSnapState = isVisible => {
+    document.querySelector("html").classList.toggle("snap-first-section", isVisible)
+    document.querySelector("header").classList.toggle("snap-first-section", isVisible)
+  }
 
+  const observer = new IntersectionObserver(
+    entries => {
+      setSnapState(entries[0].isIntersecting)
+    },
+    { threshold: 0.6, rootMargin: "1% 0px 10% 0px"}
+  )
+
+  setSnapState(parallaxContainer.getBoundingClientRect().bottom > 0)
+  observer.observe(parallaxContainer)
+}

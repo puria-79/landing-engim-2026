@@ -2,7 +2,6 @@
     margin: 0;
     border: 0;
     font-family: system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
-    scroll-behavior: smooth;
     -webkit-touch-callout: none;
     -webkit-user-select: none;
     -khtml-user-select: none;
@@ -33,17 +32,32 @@ body {
     background-color: #272818;
 }
 
+html.snap-first-section {
+    scroll-behavior: smooth;
+    scroll-snap-type: y proximity;
+}
+
 ul {
     padding-inline-start: 0;
 }
 
 
 .parallax-container {
+    border-bottom: 1px solid #272818;
     scroll-snap-align: start;
     grid-area: parallax;
     position: relative;
     display: grid;
-    grid-template-rows: 40vh;
+    grid-template-rows: 50vh;
+}
+
+.parallax-container::after {
+    content: "";
+    position: absolute;
+    bottom: -1px;
+    width: 100%;
+    height: 2px;
+    background-color: #272818;
 }
 
 .parallax {
@@ -71,9 +85,9 @@ ul {
         &:nth-of-type(1) { transform: translateZ(300px) scale(2); z-index: -7; background-image: url('https://raw.githubusercontent.com/misalagp/imgs/53ece8c56d462838e143383adc1a3078c1960e4d/1.svg'); }
         &:nth-of-type(2) { transform: translateZ(400px) scale(2); z-index: -6; background-image: url('https://raw.githubusercontent.com/misalagp/imgs/53ece8c56d462838e143383adc1a3078c1960e4d/2.svg'); }
         &:nth-of-type(3) { transform: translateZ(500px) scale(2); z-index: -5; background-image: url('https://raw.githubusercontent.com/misalagp/imgs/53ece8c56d462838e143383adc1a3078c1960e4d/3.svg'); }
-        &:nth-of-type(4) { transform: translateZ(800px) scale(2); z-index: -4; background-image: url('https://raw.githubusercontent.com/misalagp/imgs/53ece8c56d462838e143383adc1a3078c1960e4d/4.svg'); }
-        &:nth-of-type(5) { transform: translateZ(900px) scale(2); z-index: -3; background-image: url('https://raw.githubusercontent.com/misalagp/imgs/53ece8c56d462838e143383adc1a3078c1960e4d/4.svg'); }
-        &:nth-of-type(6) { transform: translateZ(1000px) scale(2); z-index: -2; background-image: url('https://gist.githubusercontent.com/mondenoir/5395b6e7d9445c3a0fc82e6ece97268c/raw/bca5c0c6397e38d79b5af9e88f78f0aa7b515b94/img-1.svg'); }
+        &:nth-of-type(4) { transform: translateZ(600px) scale(2); z-index: -4; background-image: url('https://raw.githubusercontent.com/misalagp/imgs/53ece8c56d462838e143383adc1a3078c1960e4d/4.svg'); }
+        &:nth-of-type(5) { transform: translateZ(700px) scale(2); z-index: -3; background-image: url('https://raw.githubusercontent.com/misalagp/imgs/53ece8c56d462838e143383adc1a3078c1960e4d/4.svg'); }
+        &:nth-of-type(6) { transform: translateZ(800px) scale(2); z-index: -2; background-image: url('https://gist.githubusercontent.com/mondenoir/5395b6e7d9445c3a0fc82e6ece97268c/raw/bca5c0c6397e38d79b5af9e88f78f0aa7b515b94/img-1.svg'); }
     }
 }
 
@@ -84,9 +98,8 @@ ul {
 }
 
 .landing-container {
-    position: sticky;
     opacity: 0;
-    height: 85%;
+    height: 100%;
     align-self: start;
     top: 0;
     display: grid;
@@ -106,13 +119,24 @@ ul {
 }
 
 header {
+    top: 0;
+    height: 100%;
+    position: sticky;
     scroll-snap-align: start;
-    z-index: 1;
+    scroll-snap-stop: always;
+    z-index: 2;
     display: grid;
     grid-area: header;
     grid-template-areas: "title nav login";
     grid-template-columns: 1fr 2fr 1fr;
     align-items: center;
+    transition: background-color;
+    transition-duration: 0.5s;
+    background-color: rgba(175, 194, 181, 0.9);
+}
+
+header.snap-first-section {
+    background-color: transparent;
 }
 
 #logo>h1 {
@@ -335,6 +359,7 @@ span {
 }
 
 .more {
+    z-index: 1;
     grid-area: section2;
     min-height: 50vh;
     background-color: inherit;
@@ -506,31 +531,6 @@ footer {
     font-size: 40px;
 }
 
-.privacy {
-    color: white;
-    font-weight: 900;
-    display: flex;
-    padding: 2rem;
-    justify-content: flex-start;
-    align-items: center;
-    z-index: 3;
-    position: sticky;
-    bottom: 0;
-    grid-area: privacy;
-    width: 100%;
-    height: 5rem;
-    background-color: #3d3e2f;
-    gap: 5rem;
-}
-
-.privacy button {
-    background-color: #14140c;
-    color: white;
-    padding: 1rem 2rem;
-    border-radius: 5px;
-    font-weight: 500;
-}
-
 
 @media all and (max-width: 1150px) {
     body {
@@ -556,8 +556,56 @@ footer {
 
 
 @media all and (max-width: 752px) {
+    body {
+        overflow-x: hidden;
+    }
+
+    html.snap-first-section {
+        scroll-snap-type: none;
+    }
+
+    header {
+        background-color: transparent;
+    }
+
+    .parallax {
+        perspective: none;
+        & .layer {
+        animation: none;
+        &:nth-of-type(1) { transform: none; background-image: url('https://raw.githubusercontent.com/misalagp/imgs/53ece8c56d462838e143383adc1a3078c1960e4d/1.svg'); }
+        &:nth-of-type(2) { transform: none; background-image: url('https://raw.githubusercontent.com/misalagp/imgs/53ece8c56d462838e143383adc1a3078c1960e4d/2.svg'); }
+        &:nth-of-type(3) { transform: none; background-image: url('https://raw.githubusercontent.com/misalagp/imgs/53ece8c56d462838e143383adc1a3078c1960e4d/3.svg'); }
+        &:nth-of-type(4) { transform: none; background-image: url('https://raw.githubusercontent.com/misalagp/imgs/53ece8c56d462838e143383adc1a3078c1960e4d/4.svg'); }
+        &:nth-of-type(5) { transform: none; background-image: url('https://raw.githubusercontent.com/misalagp/imgs/53ece8c56d462838e143383adc1a3078c1960e4d/4.svg'); }
+        &:nth-of-type(6) { transform: none; background-image: url('https://gist.githubusercontent.com/mondenoir/5395b6e7d9445c3a0fc82e6ece97268c/raw/bca5c0c6397e38d79b5af9e88f78f0aa7b515b94/img-1.svg'); }
+    }}
+
+    body {
+        grid-template-rows: 100vh 1fr 10rem 10rem;
+    }
+
+    .parallax-container {
+        grid-template-rows: 0px 100vh;
+    }
     .more h1 {
         font-size: 5rem;
+    }
+
+    .carosel {
+        padding: 0 1rem;
+    }
+
+    .container img {
+        width: 333px;
+        height: 200px;
+    }
+
+    .more h1 {
+        font-size: 3rem;
+    }
+
+    .contatti form {
+        padding: 2rem;
     }
 
     #hero>p {
@@ -570,11 +618,8 @@ footer {
 }
 
 @media (max-width: 550px) {
-    .contatti h1 {
-        font-size: 2rem;
-    }
     .more h1 {
-        font-size: 5rem;
+        font-size: 4rem;
     }
 
     #hero>p {
