@@ -2,6 +2,7 @@
     margin: 0;
     border: 0;
     font-family: system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
+    scroll-behavior: smooth;
     -webkit-touch-callout: none;
     -webkit-user-select: none;
     -khtml-user-select: none;
@@ -21,13 +22,11 @@ body {
     display: grid;
     grid-template-areas:
         "parallax"
-        "header"
-        "section1"
         "section2"
         "footer"
         "privacy";
     grid-template-columns: 1fr;
-    grid-template-rows: 0px 5rem 110vh 1fr 10rem 10rem;
+    grid-template-rows: 150vh 1fr 10rem 10rem;
     width: 100vw;
     min-height: 100vh;
     perspective: 1px;
@@ -38,50 +37,76 @@ ul {
     padding-inline-start: 0;
 }
 
-.parallax {
+
+.parallax-container {
+    scroll-snap-align: start;
     grid-area: parallax;
     position: relative;
-    width: 100%;
-    height: 120vh;
-    list-style-type: none;
+    display: grid;
+    grid-template-rows: 40vh;
+}
 
+.parallax {
+    perspective: 400px;
+    position: sticky;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100vh;
+    list-style-type: none;
+    
     & .layer {
+        animation-name: back;
+        animation-timeline: view();
+        animation-fill-mode: forwards;
+        animation-timing-function: ease-in-out;
+        animation-range-end: 170vh;
         position: absolute;
         width: inherit;
         height: inherit;
         background-position: center 25%;
-        z-index: -1;
         background-size: cover;
-        transition: transform 0.1 ease-out;
-
-        &:nth-of-type(1) {
-            background-image: url('https://raw.githubusercontent.com/misalagp/imgs/53ece8c56d462838e143383adc1a3078c1960e4d/1.svg');
-        }
-
-        &:nth-of-type(2) {
-            background-image: url('https://raw.githubusercontent.com/misalagp/imgs/53ece8c56d462838e143383adc1a3078c1960e4d/2.svg');
-        }
-
-        &:nth-of-type(3) {
-            background-image: url('https://raw.githubusercontent.com/misalagp/imgs/53ece8c56d462838e143383adc1a3078c1960e4d/3.svg');
-        }
-
-        &:nth-of-type(4) {
-            background-image: url('https://raw.githubusercontent.com/misalagp/imgs/53ece8c56d462838e143383adc1a3078c1960e4d/4.svg');
-        }
-
-        &:nth-of-type(5) {
-            background-image: url('https://raw.githubusercontent.com/misalagp/imgs/53ece8c56d462838e143383adc1a3078c1960e4d/4.svg');
-        }
-
-        &:nth-of-type(6) {
-            background-image: url('https://gist.githubusercontent.com/mondenoir/5395b6e7d9445c3a0fc82e6ece97268c/raw/bca5c0c6397e38d79b5af9e88f78f0aa7b515b94/img-1.svg');
-        }
+        z-index: -1;
+        
+        &:nth-of-type(1) { transform: translateZ(300px) scale(2); z-index: -7; background-image: url('https://raw.githubusercontent.com/misalagp/imgs/53ece8c56d462838e143383adc1a3078c1960e4d/1.svg'); }
+        &:nth-of-type(2) { transform: translateZ(400px) scale(2); z-index: -6; background-image: url('https://raw.githubusercontent.com/misalagp/imgs/53ece8c56d462838e143383adc1a3078c1960e4d/2.svg'); }
+        &:nth-of-type(3) { transform: translateZ(500px) scale(2); z-index: -5; background-image: url('https://raw.githubusercontent.com/misalagp/imgs/53ece8c56d462838e143383adc1a3078c1960e4d/3.svg'); }
+        &:nth-of-type(4) { transform: translateZ(800px) scale(2); z-index: -4; background-image: url('https://raw.githubusercontent.com/misalagp/imgs/53ece8c56d462838e143383adc1a3078c1960e4d/4.svg'); }
+        &:nth-of-type(5) { transform: translateZ(900px) scale(2); z-index: -3; background-image: url('https://raw.githubusercontent.com/misalagp/imgs/53ece8c56d462838e143383adc1a3078c1960e4d/4.svg'); }
+        &:nth-of-type(6) { transform: translateZ(1000px) scale(2); z-index: -2; background-image: url('https://gist.githubusercontent.com/mondenoir/5395b6e7d9445c3a0fc82e6ece97268c/raw/bca5c0c6397e38d79b5af9e88f78f0aa7b515b94/img-1.svg'); }
     }
 }
 
+@keyframes back {
+    to {
+        transform: translateZ(0) scale(1);
+    }
+}
+
+.landing-container {
+    position: sticky;
+    opacity: 0;
+    height: 85%;
+    align-self: start;
+    top: 0;
+    display: grid;
+    grid-template-areas: "header" "section1";
+    grid-template-rows: 5rem 1fr;
+    animation-name: landing;
+    animation-timeline: view();
+    animation-range: 70vh 90vh;
+    animation-timing-function: ease-in-out;
+    animation-fill-mode: forwards;
+}
+
+@keyframes landing {
+    to {
+        opacity: 1;
+    }
+}
 
 header {
+    scroll-snap-align: start;
     z-index: 1;
     display: grid;
     grid-area: header;
@@ -161,6 +186,14 @@ aside {
 }
 
 .landing {
+    opacity: 0;
+    animation: scrolling;
+    animation-fill-mode: forwards;
+    animation-delay: 0.5s;
+    animation-duration: 1s;
+    animation-timing-function: ease-in-out;
+    animation-iteration-count: 1;
+    animation-range: 0vh 50vh;
     z-index: 1;
     grid-area: section1;
     display: flex;
@@ -277,21 +310,27 @@ span {
 }
 
 .RWB {
+    opacity: 0;
     font-size: 4rem;
     color: #fff;
     text-shadow: 5px 5px 0 #232416, 10px 10px 0 #14140c;
-    animation: shadow-dance 5s infinite;
+    animation: scrolling;
+    animation-fill-mode: forwards;
+    animation-duration: 1s;
+    animation-timing-function: ease-in-out;
+    animation-iteration-count: 1;
+    animation-timeline: view();
+    animation-range: 25vh 50vh;
 }
 
-@keyframes shadow-dance {
-
-    0%,
-    100% {
-        text-shadow: 5px 5px 0 #232416, 10px 10px 0 #14140c;
+@keyframes scrolling {
+    from {
+        transform: translateY(100px);
+        opacity: 0;
     }
-
-    50% {
-        text-shadow: -5px -5px 0 #14140c, -10px -10px 0 #232416;
+    to {
+        transform: translateY(0);
+        opacity: 1;
     }
 }
 
@@ -328,10 +367,24 @@ span {
 }
 
 .container img {
+    animation: scrolling;
+    animation-fill-mode: forwards;
+    animation-duration: 1s;
+    animation-timing-function: ease-in-out;
+    animation-iteration-count: 1;
+    animation-timeline: view();
+    animation-range: 0vh 50vh;
     border-radius: 10px;
 }
 
 .contatti {
+    animation: scrolling;
+    animation-fill-mode: forwards;
+    animation-duration: 1s;
+    animation-timing-function: ease-in-out;
+    animation-iteration-count: 1;
+    animation-timeline: view();
+    animation-range: 0vh 50vh;
     width: 100%;
     height: 100%;
     margin-top: 5rem;
@@ -481,7 +534,7 @@ footer {
 
 @media all and (max-width: 1150px) {
     body {
-        grid-template-rows: 0px 7rem 80vh 1fr 10rem;
+        grid-template-rows: 170vh 1fr 10rem 10rem;
     }
 
     header {
