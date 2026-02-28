@@ -45,16 +45,16 @@ const parallaxContainer = document.querySelector(".parallax-container")
 
 if (parallaxContainer) {
   const setSnapState = isVisible => {
-    document.querySelector("html").classList.toggle("snap-first-section", isVisible)
     document.querySelector("header").classList.toggle("snap-first-section", isVisible)
   }
+  const width = window.innerWidth
 
   const observer = new IntersectionObserver(
     entries => {
       setSnapState(entries[0].isIntersecting)
     },
-    { threshold: 0.6, rootMargin: "1% 0px 10% 0px"}
-  )
+    { threshold: width > 752 ? 0.65 : 0.95, rootMargin: "1% 0px 10% 0px"}
+  ) 
 
   setSnapState(parallaxContainer.getBoundingClientRect().bottom > 0)
   observer.observe(parallaxContainer)
