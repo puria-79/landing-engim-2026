@@ -59,3 +59,25 @@ if (parallaxContainer) {
   setSnapState(parallaxContainer.getBoundingClientRect().bottom > 0)
   observer.observe(parallaxContainer)
 }
+
+const signupIcon = document.querySelector(".sign-up img")
+const signupModal = document.querySelector(".sign-up-modal")
+signupModal.addEventListener("click", e => {
+  if (e.target == signupModal) {
+    signupModal.style.display = "none"
+  }
+})
+signupIcon.addEventListener("click", (e) => {
+  signupModal.style.display = "block"
+})
+
+const loginIcon = document.querySelector(".login img")
+const loginModal = document.querySelector(".login-modal")
+loginModal.addEventListener("click", e => {
+  if (e.target == loginModal) {
+    loginModal.style.display = "none"
+  }
+})
+loginIcon.addEventListener("click", (e) => {
+  loginModal.style.display = "block"
+})
